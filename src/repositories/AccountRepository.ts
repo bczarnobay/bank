@@ -33,6 +33,10 @@ class AccountRepository {
   public async exists (accountId: string) : Promise<boolean> {
     return Account.exists({ accountId: accountId })
   }
+
+  public async count (where): Promise<number> {
+    return Account.count(where)
+  }
 }
 
 export default new AccountRepository()

@@ -1,5 +1,6 @@
 import TransactionRepository from '../repositories/TransactionRepository'
 import { ITransaction } from '../models/interfaces/transaction'
+import { ITransactionResponse } from '../models/interfaces/transaction-response'
 // import { ITransactionDocument } from 'src/models/schemas/Transaction'
 import { IAccountDocument } from 'src/models/schemas/Account'
 import AccountRepository from 'src/repositories/AccountRepository'
@@ -12,7 +13,15 @@ class TransactionService {
     const transactions = await TransactionRepository.get({ id, limit, offset })
     const total = await TransactionRepository.count({ accountId: id })
 
-    return ResponseFormatter(transactions, limit, offset, total)
+    const results = transactions.map((transactions: ITransaction): ITransactionResponse => {
+      return {
+        createdAt: transactions.createdAt,
+        amount: transactions.amount,
+        type: transactions.type
+      }
+    })
+
+    return ResponseFormatter(results, limit, offset, total)
   }
 
   public async makeTransaction (accountId: string, amount: number, type: string): Promise<IAccountDocument> {

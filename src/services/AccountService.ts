@@ -1,10 +1,24 @@
 import AccountRepository from '../repositories/AccountRepository'
 import { IAccount } from '../models/interfaces/account'
-import { IAccountDocument } from 'src/models/schemas/Account'
+import { IAccountResponse } from '../models/interfaces/account-response'
+import IResponse from 'src/models/interfaces/response'
+import ResponseFormatter from '../utils/ResponseFormatter'
 
 class AccountService {
-  public async retrieveAccounts (limit?: number, offset?: number) : Promise<IAccountDocument[]> {
-    return await AccountRepository.get({ limit: limit, offset: offset })
+  public async retrieveAccounts (limit?: number, offset?: number) : Promise<IResponse> {
+    const accounts = await AccountRepository.get({ limit: limit, offset: offset })
+    const total = await AccountRepository.count({})
+
+    const results = accounts.map((account:IAccount): IAccountResponse => {
+      return {
+        accountId: account.accountId,
+        currentBalance: account.currentBalance,
+        createdAt: account.createdAt,
+        status: account.status
+      }
+    })
+
+    return ResponseFormatter(results, limit, offset, total)
   }
 
   public async createAccount () : Promise<String> {
@@ -23,8 +37,16 @@ class AccountService {
     }
   }
 
-  public async retrieveOneAccount (accountId: string) : Promise<IAccountDocument> {
-    return await AccountRepository.getOne(accountId)
+  public async retrieveOneAccount (accountId: string) : Promise<IAccountResponse> {
+    const account = await AccountRepository.getOne(accountId)
+
+    const result: IAccountResponse = {
+      accountId: account.accountId,
+      currentBalance: account.currentBalance,
+      createdAt: account.createdAt
+    }
+
+    return result
   }
 
   private __generateRandomAccountId () : string {

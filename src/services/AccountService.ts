@@ -21,7 +21,7 @@ class AccountService {
     return ResponseFormatter(results, limit, offset, total)
   }
 
-  public async createAccount () : Promise<String> {
+  public async createAccount () : Promise<string> {
     const accountId = this.__getNewAccountId()
 
     const account: IAccount = {
@@ -43,7 +43,8 @@ class AccountService {
     const result: IAccountResponse = {
       accountId: account.accountId,
       currentBalance: account.currentBalance,
-      createdAt: account.createdAt
+      createdAt: account.createdAt,
+      status: account.status
     }
 
     return result

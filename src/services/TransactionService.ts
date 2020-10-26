@@ -2,10 +2,10 @@ import TransactionRepository from '../repositories/TransactionRepository'
 import { ITransaction } from '../models/interfaces/transaction'
 import { ITransactionResponse } from '../models/interfaces/transaction-response'
 // import { ITransactionDocument } from 'src/models/schemas/Transaction'
-import { IAccountDocument } from 'src/models/schemas/Account'
-import AccountRepository from 'src/repositories/AccountRepository'
+import { IAccountDocument } from '../models/schemas/Account'
+import AccountRepository from '../repositories/AccountRepository'
 import ResponseFormatter from '../utils/ResponseFormatter'
-import IResponse from 'src/models/interfaces/response'
+import IResponse from '../models/interfaces/response'
 
 class TransactionService {
   public async getTransactionsByAccount (accountId: string, limit?: number, offset?: number): Promise<IResponse> {

@@ -14,12 +14,14 @@ class AccountController {
 
   public async view (req: Request, res: Response): Promise<Response> {
     const { id } = req.params
-    return res.json(await AccountService.retrieveOneAccount(id))
+    const account = await AccountService.retrieveOneAccount(id)
+    return res.json(account)
   }
 
   public async create (req: Request, res:Response): Promise<Response> {
     try {
       const account = await AccountService.createAccount()
+      console.log(account)
       return res.json({ account: account })
     } catch (error) {
       res.status(400).send({ message: error.message })

@@ -7,6 +7,7 @@ const Transaction = props => (
     <td>{props.transactions.amount}</td>
     <td>{props.transactions.createdAt.substring(0,10)}</td>
     <td>{props.transactions.type}</td>
+    <td>{props.transactions.barcode}</td>
   </tr>
 )
 
@@ -76,6 +77,7 @@ export default class AccountsList extends Component {
                   <th>Amount</th>
                   <th>Created At</th>
                   <th>Type</th>
+                  <th>Barcode</th>
                 </tr>
               </thead>
               <tbody>

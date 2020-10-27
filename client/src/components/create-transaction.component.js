@@ -13,11 +13,11 @@ export default class CreateTransaction extends Component {
       this.onChangeType = this.onChangeType.bind(this);
       this.onChangeBarcode = this.onChangeBarcode.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-
+      
       this.state = {
         amount: 0,
         type: '',
-        accountId: '',
+        accountId: this.props.match.params.id ,
         barcode: ''
       }
     }
@@ -88,7 +88,7 @@ export default class CreateTransaction extends Component {
             </div>
             <div className="form-group">
               <label>Amount: </label>
-              <input  type="text"
+              <input  type="decimal"
                   required
                   className="form-control"
                   value={this.state.amount}

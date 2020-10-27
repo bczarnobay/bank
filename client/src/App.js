@@ -19,7 +19,8 @@ function App() {
         <Route path="/accounts/" exact component={AccountList} />
         <Route path="/accounts/:id" component={TransactionList} />
         <Route path="/account" component={CreateAccount} />
-        <Route path="/transaction" component={CreateTransaction} />
+        <Route path="/transaction" exact component={CreateTransaction} />
+        <Route path="/transaction/:id" component={CreateTransaction} />
        </div>
      </Router>
   );

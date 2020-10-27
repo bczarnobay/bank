@@ -18,7 +18,7 @@ const Summary = props => (
       <td>{props.summary.accountId}</td>
     </tr>
     <tr>
-      <label>Current Balance</label>
+      <label>Balance</label>
       <td>{props.summary.currentBalance}</td>
     </tr>
     <tr>
@@ -84,6 +84,7 @@ export default class AccountsList extends Component {
                 { this.transactionsList() }
               </tbody>
             </table>
+            <Link to={"/transaction/" + this.props.match.params.id}>Make Transaction</Link> 
           </div>
     )
   }

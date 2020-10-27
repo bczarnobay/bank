@@ -25,10 +25,17 @@ class TransactionService {
   }
 
   public async makeTransaction (accountId: string, amount: number, type: string): Promise<IAccountDocument> {
-    let { id, currentBalance } = await AccountRepository.getOne(accountId)
+    const account = await AccountRepository.getOne(accountId)
+
+    if(account === null){
+      throw new Error('Account does not exist')
+    }
+    
+    let { id, currentBalance } = account
 
     try {
       currentBalance = this.__validateAndUpdateBalance(amount, type, currentBalance)
+      console.log(currentBalance)
     } catch (error) {
       throw new Error(error.message)
     }
@@ -53,14 +60,13 @@ class TransactionService {
       },
       { new: true }
     )
+    console.log(accountUpdated)
 
     return accountUpdated
   }
 
   private __validateAndUpdateBalance (amount: number, type:string, currentBalance: number): number {
-    if (currentBalance < 0) {
-      throw new Error('Insuficient balance.')
-    }
+    console.log('cheguei aqui')
 
     if (type === 'Withdrawn' || type === 'Payment') {
       if (amount < currentBalance) {

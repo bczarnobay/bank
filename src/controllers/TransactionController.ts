@@ -10,7 +10,7 @@ class TransactionController {
   public async create (req: Request, res: Response): Promise<Response> {
     const { id } = req.params
     const { amount, type } = req.body
-
+    
     try {
       return res.json(await TransactionService.makeTransaction(id, amount, type))
     } catch (error) {

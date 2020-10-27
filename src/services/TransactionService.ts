@@ -9,7 +9,14 @@ import IResponse from '../models/interfaces/response'
 
 class TransactionService {
   public async getTransactionsByAccount (accountId: string, limit?: number, offset?: number): Promise<IResponse> {
-    const { id } = await AccountRepository.getOne(accountId)
+    const account = await AccountRepository.getOne(accountId)
+
+    if(account === null){
+      throw new Error('Account does not exist')
+    }
+    
+    const { id } = account
+
     const transactions = await TransactionRepository.get({ id, limit, offset })
     const total = await TransactionRepository.count({ accountId: id })
 

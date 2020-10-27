@@ -15,7 +15,7 @@ describe('Transaction service', () => {
     let account
       account = await AccountService.createAccount()
 
-    const response = await TransactionService.makeTransaction(account, 10, 'Deposit')
+    const response = await TransactionService.makeTransaction(account, 10, 'Deposit', '')
     
     expect(response).toBeDefined()
     expect(response.currentBalance).toBe(10)

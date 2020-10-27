@@ -6,11 +6,12 @@ import { IAccountDocument } from '../models/schemas/Account'
 import AccountRepository from '../repositories/AccountRepository'
 import ResponseFormatter from '../utils/ResponseFormatter'
 import IResponse from '../models/interfaces/response'
+import { IAccountResponse } from 'src/models/interfaces/account-response'
 
 class TransactionService {
   public async getTransactionsByAccount (accountId: string, limit?: number, offset?: number): Promise<IResponse> {
     const account = await AccountRepository.getOne(accountId)
-
+    console.log(limit, offset)
     if(account === null){
       throw new Error('Account does not exist')
     }
@@ -32,7 +33,7 @@ class TransactionService {
     return ResponseFormatter(results, limit, offset, total)
   }
 
-  public async makeTransaction (accountId: string, amount: number, type: string, barcode: string): Promise<IAccountDocument> {
+  public async makeTransaction (accountId: string, amount: number, type: string, barcode: string): Promise<IAccountResponse> {
     const account = await AccountRepository.getOne(accountId)
 
     if(account === null){
@@ -69,8 +70,14 @@ class TransactionService {
       },
       { new: true }
     )
-
-    return accountUpdated
+    
+    const accountSummary: IAccountResponse = {
+      accountId: accountUpdated.accountId,
+      createdAt: accountUpdated.createdAt,
+      currentBalance: accountUpdated.currentBalance,
+      status: accountUpdated.status
+    }
+    return accountSummary
   }
 
   private __validateAndUpdateBalance (amount: number, type:string, currentBalance: number): number {

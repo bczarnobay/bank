@@ -16,8 +16,7 @@ const AccountSchema = new mongoose.Schema(
     },
     currentBalance: {
       type: Number,
-      required: true,
-      trim: false
+      required: true
     },
     status: {
       type: String,

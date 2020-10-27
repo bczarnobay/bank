@@ -22,6 +22,17 @@ To execute both applications you can follow the next steps:
 ** Jest
 ** MongoDB
 
+```bash 
+├───controllers     - responsible for route management
+├───models
+│   ├───interfaces  - types definition
+│   └───schemas     - schema definition
+├───repositories    - reponsible for accessing collections
+├───services        - responsible for the business logic
+└───utils           - helper functions used in the project
+```
+
+The project consists of two main domains, accounts and transactions
 ### Curl
 
 If you want to test the API without using the front end, you can find requests example below:
@@ -34,7 +45,7 @@ curl --location --request POST 'localhost:3333/v1/accounts/'
 Response: 
 ```json
 {
-  "account": <returns new accountId>
+  "account": "returns new accountId"
 }
 ```
 
@@ -51,10 +62,10 @@ curl --location --request POST 'localhost:3333/v1/accounts/<ACCOUNT_ID>/transact
 Response:
 ```json
 {
-  "accountId": <accountId>,
-  "createdAt": <account creation date,
-  "currentBalance": <account balance after transaction>,
-  "status": <account status>
+  "accountId": "accountId",
+  "createdAt": "account creation date",
+  "currentBalance": "account balance after transaction",
+  "status": "account status"
 }
 ```
 
@@ -66,10 +77,10 @@ curl --location --request GET 'localhost:3333/v1/accounts/<ACCOUNT_ID>'
 Response:
 ```json
 {
-  "accountId": <accountId>,
-  "createdAt": <account creation date,
-  "currentBalance": <account balance after transaction>,
-  "status": <account status>
+  "accountId": "accountId",
+  "createdAt": "account creation date",
+  "currentBalance": "account balance after transaction",
+  "status": "account status"
 }
 ```
 
@@ -83,13 +94,13 @@ Response:
 {
   "results" : [
     {
-      "accountId": <accountId>,
-      "createdAt": <account creation date,
-      "currentBalance": <account balance after transaction>,
-      "status": <account status>
+      "accountId": "accountId",
+      "createdAt": "account creation date",
+      "currentBalance": "account balance after transaction",
+      "status": "account status"
     }
   ],
-  "total": <total of entries>
+  "total": "total of entries"
 }
 ```
 
@@ -103,13 +114,13 @@ Response:
 {
   "results" : [
     {
-      "createdAt": <transaction creation date,
-      "amount": <transaction amount>,
-      "type": <transaction type>,
-      "barcode": <payment barcode>
+      "createdAt": "transaction creation date",
+      "amount": "transaction amount",
+      "type": "transaction type",
+      "barcode": "payment barcode"
     }
   ],
-  "total": <total of entries>
+  "total": "total of entries"
 }
 ```
 

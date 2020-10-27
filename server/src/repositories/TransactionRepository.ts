@@ -14,7 +14,7 @@ class TransactionRepository {
       offset?: any
    }) : Promise<ITransactionDocument[]> {
     console.log(id)
-    return Transaction.find({ accountId: id })
+    return Transaction.find({ accountId: id }).sort({ createdAt: 'desc'})
       .skip((limit * offset) - limit)
       .limit(limit)
   }

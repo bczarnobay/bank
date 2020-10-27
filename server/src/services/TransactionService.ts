@@ -45,6 +45,8 @@ class TransactionService {
     currentBalance = this.__validateAndUpdateBalance(amount, type, currentBalance)
     if(currentBalance < 0 ){
        status = 'OVERDRAWN'
+    } else {
+      status = 'ACTIVE'
     }
 
     const transaction: ITransaction = {

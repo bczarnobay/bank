@@ -4,4 +4,5 @@ export interface ITransaction {
     createdAt?: Date,
     amount: Number,
     type: string,
+    barcode?: string
   }

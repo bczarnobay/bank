@@ -24,14 +24,15 @@ class TransactionService {
       return {
         createdAt: transactions.createdAt,
         amount: transactions.amount,
-        type: transactions.type
+        type: transactions.type,
+        barcode: transactions.barcode
       }
     })
 
     return ResponseFormatter(results, limit, offset, total)
   }
 
-  public async makeTransaction (accountId: string, amount: number, type: string): Promise<IAccountDocument> {
+  public async makeTransaction (accountId: string, amount: number, type: string, barcode: string): Promise<IAccountDocument> {
     const account = await AccountRepository.getOne(accountId)
 
     if(account === null){
@@ -49,7 +50,8 @@ class TransactionService {
     const transaction: ITransaction = {
       accountId: id,
       amount: amount,
-      type: type
+      type: type,
+      barcode: barcode ?? ''
     }
 
     try {

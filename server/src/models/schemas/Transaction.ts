@@ -22,6 +22,10 @@ const TransactionSchema = new mongoose.Schema(
       type: String,
       enum: ['Deposit', 'Withdrawn', 'Payment'],
       required: true
+    },
+    barcode: {
+      type: String,
+      size: 20
     }
   }
 )

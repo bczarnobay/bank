@@ -6,22 +6,25 @@ In this project it is possible to simulate few bank operations such as *deposit*
 
 To setup the project you can follow the next steps:
 1. Clone this repository into your machine.
-2. Go to folder *client* and run *npm install*
-3. Go to folder *server* and run *npm install*
+2. Go to folder ***client*** and run ***npm install***
+3. Go to folder ***server*** and run ***npm install***
 
 This application uses ports 3000 and 3333, make sure you have them available when starting the application.
 To execute both applications you can follow the next steps:
-1. To start the backend server, go to folder *server* and run *npm run start*
-2. To start the web client, go to folder *client* and run *npm start*
+1. To start the backend server, go to folder ***server*** and run ***npm run start***
+2. To start the web client, go to folder ***client*** and run ***npm start***
+
+The database used is already configured.
 
 ## API
 
-* Technologies used:
-** Typescript
-** Node 12+
-** Jest
-** MongoDB
+Technologies used:
+* Typescript
+* Node 12+
+* Jest
+* MongoDB
 
+Project structure:
 ```bash 
 ├───controllers     - responsible for route management
 ├───models

@@ -13,17 +13,18 @@ export default class CreateTransaction extends Component {
       this.onChangeType = this.onChangeType.bind(this);
       this.onChangeBarcode = this.onChangeBarcode.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-      
+
       this.state = {
-        amount: 0,
+        amount: 0.00,
         type: '',
         accountId: this.props.match.params.id ,
         barcode: ''
       }
     }
       onChangeAmount(e) {
+      const  amount = e.target.value.toString().replace(',', '.')
           this.setState({
-            amount: e.target.value
+            amount: amount
           });
       }
         onChangeType(e) {
@@ -88,7 +89,7 @@ export default class CreateTransaction extends Component {
             </div>
             <div className="form-group">
               <label>Amount: </label>
-              <input  type="decimal"
+              <input  type="amount"
                   required
                   className="form-control"
                   value={this.state.amount}

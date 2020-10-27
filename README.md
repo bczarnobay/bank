@@ -34,8 +34,18 @@ Project structure:
 ├───services        - responsible for the business logic
 └───utils           - helper functions used in the project
 ```
+### Requirements
+The project consists of two main domains, accounts and transactions.
 
-The project consists of two main domains, accounts and transactions
+You can create and acccount and you will receive a 6 digit id to make transactions
+You can request a summary of your account
+You can list all accounts in the database
+
+You can make a withdrawn, providing a valid account id. If you have insufficent balance, your account status will be set to OVERDRAWN.
+You can make payments, providing a valid account id and a 20 digit barcode.
+You can make a deposit, providing a valid account id
+You can list all transactions made for the account provided.
+
 ### Curl
 
 If you want to test the API without using the front end, you can find requests example below:

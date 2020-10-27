@@ -11,42 +11,30 @@ export default class CreateTransaction extends Component {
       this.onChangeAmount = this.onChangeAmount.bind(this);
       this.onChangeAccount = this.onChangeAccount.bind(this);
       this.onChangeType = this.onChangeType.bind(this);
+      this.onChangeBarcode = this.onChangeBarcode.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
 
       this.state = {
         amount: 0,
         type: '',
-        accountId: ''
+        accountId: '',
+        barcode: ''
       }
     }
-
-    componentDidMount(){
-        // axios.get('http://localhost:5000/users/')
-        //   .then(response => {
-        //     if (response.data.length > 0) {
-        //       this.setState({
-        //         users: response.data.map(user => user.username),
-        //         username: response.data[0].username
-        //       });
-        //     }
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   })
-    }
-
       onChangeAmount(e) {
-        // const re = /^[0-9\b]+$/;      
-        // if (e.target.value === '' || re.test(e.target.value)) {
           this.setState({
             amount: e.target.value
           });
-        // }
       }
         onChangeType(e) {
-          console.log(e.target.value)
           this.setState({
             type: e.target.value
+          });
+        }
+
+        onChangeBarcode(e) {
+          this.setState({
+            barcode: e.target.value
           });
         }
 
@@ -72,7 +60,7 @@ export default class CreateTransaction extends Component {
               console.log(error);
            });
 
-          // window.location = '/accounts/' + this.state.accountId;
+          window.location = '/accounts/' + this.state.accountId;
           }
 
       render() {
@@ -107,6 +95,21 @@ export default class CreateTransaction extends Component {
                   onChange={this.onChangeAmount}
                   />
             </div>
+
+            { this.state.type === 'Payment' ? 
+              <div className="form-group">
+                <label>Barcode: </label>
+                <input  type="text"
+                    required
+                    className="form-control"
+                    value={this.state.barcode}
+                    onChange={this.onChangeBarcode}
+                    />
+              </div> 
+              :
+              <div></div>
+            }
+
             <div className="form-group">
               <input type="submit" value="Create Transaction Log" className="btn btn-primary" />
             </div>

@@ -2,6 +2,17 @@
 
 In this project it is possible to simulate few bank operations such as *deposit*, *payment*, *withdrawn*. It is also possible to create a new account to make transactions.
 
+- [Installation and execution](#installation-and-execution)
+- [API](#api)
+  * [Requirements](#requirements)
+  * [Curl](#curl)
+    + [POST /v1/accounts/](#post--v1-accounts-)
+    + [POST /v1/accounts/:id/transactions/](#post--v1-accounts--id-transactions-)
+    + [GET /v1/accounts/:id/](#get--v1-accounts--id-)
+    + [GET /v1/accounts/](#get--v1-accounts-)
+    + [GET /v1/accounts/:id/transactions/](#get--v1-accounts--id-transactions-)
+- [Client](#client)
+
 ## Installation and execution
 
 To setup the project you can follow the next steps:

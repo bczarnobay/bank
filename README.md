@@ -57,6 +57,8 @@ You can make payments, providing a valid account id and a 20 digit barcode.
 You can make a deposit, providing a valid account id
 You can list all transactions made for the account provided.
 
+Transaction types available: 'Deposit', 'Withdrawn', 'Payment'. You must inform on of theese when sending a request to make a transaction.
+
 ### Curl
 
 If you want to test the API without using the front end, you can find requests example below:

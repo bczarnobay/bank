@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { request, Request, Response } from 'express'
 import AccountService from '../services/AccountService'
 
 class AccountController {
@@ -8,20 +8,23 @@ class AccountController {
       const returnAll = await AccountService.retrieveAccounts(Number(limit), Number(offset))
       return res.json(returnAll)
     } catch (error) {
-      res.sendStatus(501)
+      res.status(400).send({message: error.message})
     }
   }
 
   public async view (req: Request, res: Response): Promise<Response> {
-    const { id } = req.params
-    const account = await AccountService.retrieveOneAccount(id)
-    return res.json(account)
+    try {
+      const { id } = req.params
+      const account = await AccountService.retrieveOneAccount(id)
+      return res.json(account)
+    } catch (error) {
+      res.status(400).send({message: error.message})
+    }
   }
 
   public async create (req: Request, res:Response): Promise<Response> {
     try {
       const account = await AccountService.createAccount()
-      console.log(account)
       return res.json({ account: account })
     } catch (error) {
       res.status(400).send({ message: error.message })

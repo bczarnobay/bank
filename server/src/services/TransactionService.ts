@@ -39,14 +39,13 @@ class TransactionService {
       throw new Error('Account does not exist')
     }
     
-    let { id, currentBalance } = account
+    let { id, currentBalance, status } = account
 
-    try {
-      currentBalance = this.__validateAndUpdateBalance(amount, type, currentBalance)
-      console.log(currentBalance)
-    } catch (error) {
-      throw new Error(error.message)
+    currentBalance = this.__validateAndUpdateBalance(amount, type, currentBalance)
+    if(currentBalance < 0 ){
+       status = 'OVERDRAWN'
     }
+
     const transaction: ITransaction = {
       accountId: id,
       amount: amount,
@@ -57,30 +56,25 @@ class TransactionService {
     try {
       await TransactionRepository.create(transaction)
     } catch (error) {
-      console.log('aqui foi')
-      throw new Error('insuficiente balance')
+      throw new Error('Transaction not performed')
     }
 
     const accountUpdated = await AccountRepository.findOneAndUpdate(
       { accountId: accountId },
       {
         $set:
-        { currentBalance: currentBalance }
+        { currentBalance: currentBalance,
+          status: status
+        }
       },
       { new: true }
     )
-    console.log(accountUpdated)
 
     return accountUpdated
   }
 
   private __validateAndUpdateBalance (amount: number, type:string, currentBalance: number): number {
-    console.log('cheguei aqui')
-
     if (type === 'Withdrawn' || type === 'Payment') {
-      if (amount < currentBalance) {
-        throw new Error('Insuficient balance.')
-      }
       currentBalance -= amount
     } else {
       currentBalance += amount
